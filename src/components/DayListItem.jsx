@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import classNames from "classnames";
 import "components/DayListItem.scss";
 
@@ -14,11 +14,16 @@ export default function DayListItem(props) {
     if (spots === 0) {
       return "no spot remaining";
     }
-    return spots > 1 ? `${spots} spots remaining` : `${spots} spot remaining`;
+    const textFormatSpot = spots === 1 ? "spot" : "spots";
+    return `${spots} ${textFormatSpot} remaining`;
+  };
+
+  const handleClick = () => {
+    setDay(name);
   };
 
   return (
-    <li className={dayClass} onClick={() => setDay(name)}>
+    <li className={dayClass} onClick={handleClick}>
       <h2 className="text--regular">{name}</h2>
       <h3 className="text--light">{formatSpot()}</h3>
     </li>
